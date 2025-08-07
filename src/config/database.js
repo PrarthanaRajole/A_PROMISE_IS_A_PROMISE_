@@ -7,7 +7,7 @@ const connectToDatabase =async () =>{
         password: 'n3u3da!',
         database : 'stocks',
     });
-
+    
     return connection;
 };
 module.exports = {connectToDatabase};

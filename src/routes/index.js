@@ -33,7 +33,7 @@ function setRoutes(app) {
 
     app.use('/api/transactions', transactionsRouter);
 
-
+    
     // ✅ Users routes
     const usersRouter = Router();
     usersRouter.get('/', indexController.getUsers.bind(indexController));
