@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard | Capita</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background: linear-gradient(to bottom right, #000000, #000428, #001f33);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: white;
+      overflow-x: hidden;
+    }
+
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 0;
+    }
+
+    .container {
+        position: relative;
+        z-index: 1;
+        padding: 60px 40px;
+        max-width: 1200px;
+        margin: 0 auto; /* 👈 this centers the layout */
+      }
+      
+
+    h1 {
+      text-align: center;
+      font-size: 40px;
+      color: #00ffcc;
+      margin-bottom: 40px;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+      justify-items: center;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+      width: 100%;
+    }
+
+    .card {
+      height: 200px;
+      width: 100%;
+      max-width: 300px;
+      background-color: #1a1a1a;
+      border-radius: 12px;
+      padding: 30px;
+      text-align: center;
+      box-shadow: 0 0 10px rgba(0, 255, 204, 0.2);
+      transition: transform 0.3s, box-shadow 0.3s;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(0, 255, 204, 0.5);
+    }
+
+    .card h3 {
+      font-size: 22px;
+      margin-bottom: 10px;
+      color: #00ffcc;
+    }
+
+    .card p {
+      font-size: 14px;
+      color: #ccc;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 50px;
+      color: #aaa;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="graph-bg"></canvas>
+
+<div class="container">
+  <h1>Welcome to Capita Dashboard</h1>
+  <div class="card-grid">
+    <a href="dashboard.html">
+      <div class="card">
+        <h3>Buy / Sell</h3>
+        <p>Trade with our stock panel</p>
+      </div>
+    </a>
+    <a href="watchlist.html">
+      <div class="card">
+        <h3>Watchlist</h3>
+        <p>Keep an eye on your favorite stocks</p>
+      </div>
+    </a>
+    <a href="myportfolio.html">
+        <div class="card">
+          <h3>My Portfolio</h3>
+          <p>Track your holdings and performance</p>
+        </div>
+      </a>
+    <a href="transactions.html">
+      <div class="card">
+        <h3>Transactions</h3>
+        <p>View your past buy/sell history</p>
+      </div>
+    </a>
+    <a href="sip.html">
+      <div class="card">
+        <h3>SIP Calculator</h3>
+        <p>Plan and calculate your SIP investments</p>
+      </div>
+    </a>
+    <a href="guide.html">
+        <div class="card">
+          <h3>Guide</h3>
+          <p>Learn about stocks</p>
+        </div>
+      </a>
+      <a href="profile.html">
+        <div class="card">
+          <h3>My Profile</h3>
+          <p>Manage your account details</p>
+        </div>
+      </a>
+  </div>
+</div>
+
+<div class="footer">
+  © 2025 Capita by Sharmila | All Rights Reserved
+</div>
+
+<script>
+  const canvas = document.getElementById("graph-bg");
+  const ctx = canvas.getContext("2d");
+
+  function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+
+  resizeCanvas();
+  window.addEventListener('resize', resizeCanvas);
+
+  let points = [];
+  let spacing = 100;
+
+  for (let x = 0; x < canvas.width + spacing; x += spacing) {
+    let y = canvas.height / 2 + Math.random() * 100 - 50;
+    points.push({ x, y });
+  }
+
+  function drawGraph() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.beginPath();
+    ctx.moveTo(points[0].x, points[0].y);
+    for (let i = 1; i < points.length; i++) {
+      ctx.lineTo(points[i].x, points[i].y);
+    }
+    ctx.strokeStyle = '#00ffcc';
+    ctx.lineWidth = 2;
+    ctx.shadowBlur = 15;
+    ctx.shadowColor = '#00bfff';
+    ctx.stroke();
+    ctx.shadowBlur = 0;
+  }
+
+  function animate() {
+    for (let i = 0; i < points.length; i++) {
+      points[i].y += Math.random() * 4 - 2;
+      points[i].x -= 0.5;
+      if (points[i].x < -spacing) {
+        points[i].x = canvas.width;
+        points[i].y = canvas.height / 2 + Math.random() * 100 - 50;
+      }
+    }
+    drawGraph();
+    requestAnimationFrame(animate);
+  }
+
+  animate();
+</script>
+
+</body>
+</html>
