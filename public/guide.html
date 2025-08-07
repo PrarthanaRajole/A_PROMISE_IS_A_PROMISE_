@@ -261,20 +261,6 @@
       <li><strong>Index:</strong> A benchmark (like Nifty, Sensex) for the market</li>
     </ul>
 
-    <h2>📰 Smart News Feed</h2>
-    <p>Use Smart Newsfeed to make informed decisions:</p>
-    <div id="newsFeedWidget"></div>
-    <script src="https://widgets.profit.com/news-feed-widget.js"></script>
-    <script>
-      NewsFeedWidget.init({
-        container: '#newsFeedWidget',
-        symbols: ['RELIANCE', 'TCS', 'SBIN', 'INFY', 'NSE:*'],
-        source: 'news_and_tweets',
-        theme: 'dark',
-        maxItems: 5
-      });
-    </script>
-
     <div class="news-highlights">
       <h3>📍 Market Highlights</h3>
       <ul>
@@ -302,7 +288,7 @@
 
     // 📰 Load Live News from NewsAPI
     async function fetchLiveNews() {
-      const apiKey = 'YOUR_API_KEY_HERE'; // 🔑 Replace with your NewsAPI key
+      const apiKey = '68254dae6cdb409ca6554598f1032c99'; // 🔑 Replace with your NewsAPI key
       const endpoint = `https://newsapi.org/v2/everything?q=stock%20market&language=en&sortBy=publishedAt&pageSize=5&apiKey=${apiKey}`;
 
       try {
@@ -340,3 +326,4 @@
   </footer>
 </body>
 </html>
+
